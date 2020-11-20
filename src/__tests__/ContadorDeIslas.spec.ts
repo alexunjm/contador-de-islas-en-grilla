@@ -51,7 +51,7 @@ describe("Contador de Islas", () => {
     expect(contadorDeIslas.contarIslas()).toBe(2);
   });
 
-  test("al pasar una rejilla nxm con 2 islas [{ (0, 1), (0, 2) }, { (1, 3) }], debería devolver dos", () => {
+  test("al pasar una rejilla nxm con 2 islas [{ (0, 1), (0, 2) }, { (1, 3) }] sin conexión vertical, debería devolver dos", () => {
     const contadorDeIslas = new ContadorDeIslas([
       [0, 1, 1, 0, 0, 0],
       [0, 0, 0, 1, 0, 0],
