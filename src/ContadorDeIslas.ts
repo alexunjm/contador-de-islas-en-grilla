@@ -20,10 +20,10 @@ class Isla {
     }
     return false;
   }
-
+  /* 
   public toString(): string {
     return `Isla (${JSON.stringify(this._nodos)})`;
-  }
+  } */
 }
 
 class ContadorDeIslas {
@@ -47,15 +47,13 @@ class ContadorDeIslas {
         const nodo = filaI[j];
         if (nodo === 1) {
           let isla;
-          if (this.primerNodoDeFila(j) || this.nodoIzquierdaEsAgua(i, j)) {
+          if (this.esPrimerNodoDeFila(j) || this.esNodoIzquierdaAgua(i, j)) {
             contador++;
             isla = new Isla();
             this._islasEncontradas.push(isla);
           } else {
             const indiceUltimaIsla = this._islasEncontradas.length - 1;
-            if (indiceUltimaIsla >= 0) {
-              isla = this._islasEncontradas[indiceUltimaIsla];
-            }
+            isla = this._islasEncontradas[indiceUltimaIsla];
           }
           isla.agregarNodo(i, j);
         }
@@ -68,7 +66,7 @@ class ContadorDeIslas {
     ) {
       const isla = this._islasEncontradas[numeroIsla];
       const haceParteDeOtraIsla = isla.recorrerNodosIslaHasta(({ i, j }) => {
-        return i > 0 && this.nodoArribaEsTierra(i, j);
+        return i > 0 && this.esNodoArribaTierra(i, j);
       });
       if (haceParteDeOtraIsla) {
         contador--;
@@ -77,31 +75,16 @@ class ContadorDeIslas {
     return contador;
   }
 
-  private nodoArribaEsTierra(i: number, j: number): boolean {
-    console.log("%c⧭", "color: #e50000", {
-      i,
-      j,
-      rejilla: this._rejilla,
-      rejillaIJ: this._rejilla[i][j],
-      rejillaIJArriba: this._rejilla[i - 1][j],
-    });
+  private esNodoArribaTierra(i: number, j: number): boolean {
     return this._rejilla[i - 1][j] === 1;
   }
 
-  nodoIzquierdaEsAgua(i: number, j: number) {
+  private esNodoIzquierdaAgua(i: number, j: number) {
     return i >= 0 && j > 0 && this._rejilla[i][j - 1] === 0;
   }
 
-  primerNodoDeFila(j: number) {
+  private esPrimerNodoDeFila(j: number) {
     return j === 0;
-  }
-
-  ultimoNodoRevisadoEsElDeLaIzquierda(
-    i: number,
-    j: number,
-    ultimoNodoRevisado: { i: number; j: number }
-  ) {
-    return ultimoNodoRevisado.i === i && ultimoNodoRevisado.j === j;
   }
 }
 
