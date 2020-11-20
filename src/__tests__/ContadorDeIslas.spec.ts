@@ -30,9 +30,44 @@ describe("Contador de Islas", () => {
     const contadorDeIslas = new ContadorDeIslas([[0]]);
     expect(contadorDeIslas.contarIslas()).toBe(0);
   });
+
   test("al pasar una rejilla 1x1 con 1 isla, debería devolver uno", () => {
     const contadorDeIslas = new ContadorDeIslas([[1]]);
     expect(contadorDeIslas.contarIslas()).toBe(1);
+  });
+
+  test("al pasar una rejilla 1x2 con 1 isla en (0, 0), debería devolver uno", () => {
+    const contadorDeIslas = new ContadorDeIslas([[1, 0]]);
+    expect(contadorDeIslas.contarIslas()).toBe(1);
+  });
+
+  test("al pasar una rejilla 1xn con 1 isla en {(0, 1), (0, 2)}, debería devolver uno", () => {
+    const contadorDeIslas = new ContadorDeIslas([[0, 1, 1, 0, 0]]);
+    expect(contadorDeIslas.contarIslas()).toBe(1);
+  });
+
+  test("al pasar una rejilla 1xn con 2 islas [{ (0, 1), (0, 2) }, { (0, 5) }], debería devolver dos", () => {
+    const contadorDeIslas = new ContadorDeIslas([[0, 1, 1, 0, 0, 1]]);
+    expect(contadorDeIslas.contarIslas()).toBe(2);
+  });
+
+  test("al pasar una rejilla nxm con 2 islas [{ (0, 1), (0, 2) }, { (1, 3) }], debería devolver dos", () => {
+    const contadorDeIslas = new ContadorDeIslas([
+      [0, 1, 1, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0],
+    ]);
+    expect(contadorDeIslas.contarIslas()).toBe(2);
+  });
+
+  test("al pasar una rejilla nxn con 2 islas que abarquen 2 o más nodos horizontales y verticales contínuos, debería devolver dos", () => {
+    const contadorDeIslas = new ContadorDeIslas([
+      [1, 1, 0, 0, 0],
+      [1, 1, 0, 0, 1],
+      [0, 0, 0, 0, 1],
+      [0, 0, 1, 1, 1],
+      [0, 1, 1, 1, 0],
+    ]);
+    expect(contadorDeIslas.contarIslas()).toBe(2);
   });
 });
 
